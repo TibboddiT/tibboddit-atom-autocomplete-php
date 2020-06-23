@@ -210,11 +210,17 @@ abstract class Tools
             'descriptions'  => $docParseResult['descriptions'],
             'deprecated'    => $function->isDeprecated() || $docParseResult['deprecated']
         );
-
-        $result['return']['type'] = method_exists($function, 'getReturnType') && $function->hasReturnType() // PHP7
-            ? $function->getReturnType()->__toString()
-            : $result['return']['type']
-        ;
+        
+        $phpVersion = (float)phpversion();
+        
+        if($phpVersion >= 7.1){
+            $result['return']['type'] = $function->getReturnType()->getName();
+        } else {
+            $result['return']['type'] = method_exists($function, 'getReturnType') && $function->hasReturnType() // PHP7
+                ? $function->getReturnType()->__toString()
+                : $result['return']['type']
+            ;
+        }
 
         return $result;
     }
