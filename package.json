@@ -2,10 +2,10 @@
   "name": "atom-autocomplete-php",
   "main": "./lib/peekmo-php-atom-autocomplete",
   "version": "0.26.0",
-  "description": "Atom autocompletion plugin for PHP language",
+  "description": "Atom autocompletion plugin for PHP language. Original package: https://github.com/Peekmo/atom-autocomplete-php.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Peekmo/atom-autocomplete-php.git"
+    "url": "https://github.com/orukaz/atom-autocomplete-php.git"
   },
   "license": "MIT",
   "engines": {
