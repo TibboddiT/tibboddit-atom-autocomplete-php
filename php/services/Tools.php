@@ -214,7 +214,7 @@ abstract class Tools
         $phpVersion = (float)phpversion();
         
         if ($phpVersion >= 7.1) {
-            $result['return']['type'] = $function->getReturnType()->getName();
+            $result['return']['type'] = $function->hasReturnType() ? $function->getReturnType()->getName() : $result['return']['type'];
         } else {
             $result['return']['type'] = method_exists($function, 'getReturnType') && $function->hasReturnType() // PHP7
                 ? $function->getReturnType()->__toString()
