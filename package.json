@@ -5,7 +5,7 @@
   "description": "Atom autocompletion plugin for PHP language",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TibboddiT/atom-autocomplete-php.git"
+    "url": "https://github.com/TibboddiT/tibboddit-atom-autocomplete-php.git"
   },
   "license": "MIT",
   "engines": {
