@@ -19,15 +19,15 @@ module.exports =
             functions: 'https://secure.php.net/function.'
         }
 
-        @config['composer'] = atom.config.get('atom-autocomplete-php.binComposer')
-        @config['php'] = atom.config.get('atom-autocomplete-php.binPhp')
-        @config['autoload'] = atom.config.get('atom-autocomplete-php.autoloadPaths')
-        @config['gotoKey'] = atom.config.get('atom-autocomplete-php.gotoKey')
-        @config['classmap'] = atom.config.get('atom-autocomplete-php.classMapFiles')
-        @config['packagePath'] = atom.packages.resolvePackagePath('atom-autocomplete-php')
-        @config['verboseErrors'] = atom.config.get('atom-autocomplete-php.verboseErrors')
-        @config['insertNewlinesForUseStatements'] = atom.config.get('atom-autocomplete-php.insertNewlinesForUseStatements')
-        @config['ensureNewLineAfterNamespace'] = atom.config.get('atom-autocomplete-php.ensureNewLineAfterNamespace')
+        @config['composer'] = atom.config.get('tibboddit-atom-autocomplete-php.binComposer')
+        @config['php'] = atom.config.get('tibboddit-atom-autocomplete-php.binPhp')
+        @config['autoload'] = atom.config.get('tibboddit-atom-autocomplete-php.autoloadPaths')
+        @config['gotoKey'] = atom.config.get('tibboddit-atom-autocomplete-php.gotoKey')
+        @config['classmap'] = atom.config.get('tibboddit-atom-autocomplete-php.classMapFiles')
+        @config['packagePath'] = atom.packages.resolvePackagePath('tibboddit-atom-autocomplete-php')
+        @config['verboseErrors'] = atom.config.get('tibboddit-atom-autocomplete-php.verboseErrors')
+        @config['insertNewlinesForUseStatements'] = atom.config.get('tibboddit-atom-autocomplete-php.insertNewlinesForUseStatements')
+        @config['ensureNewLineAfterNamespace'] = atom.config.get('tibboddit-atom-autocomplete-php.ensureNewLineAfterNamespace')
 
     ###*
      * Writes configuration in "php lib" folder
