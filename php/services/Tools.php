@@ -210,17 +210,11 @@ abstract class Tools
             'descriptions'  => $docParseResult['descriptions'],
             'deprecated'    => $function->isDeprecated() || $docParseResult['deprecated']
         );
-        
-        $phpVersion = (float)phpversion();
-        
-        if ($phpVersion >= 7.1) {
-            $result['return']['type'] = $function->hasReturnType() ? $function->getReturnType()->getName() : $result['return']['type'];
-        } else {
-            $result['return']['type'] = method_exists($function, 'getReturnType') && $function->hasReturnType() // PHP7
-                ? $function->getReturnType()->__toString()
-                : $result['return']['type']
-            ;
-        }
+
+        $result['return']['type'] = method_exists($function, 'getReturnType') && $function->hasReturnType() // PHP7
+            ? (version_compare(PHP_VERSION, '7.1.0', '>=') ? $function->getReturnType()->getName() : $function->getReturnType()->__toString())
+            : $result['return']['type']
+        ;
 
         return $result;
     }
@@ -620,7 +614,7 @@ abstract class Tools
                     'deprecated'   => false
                 );
             }
-            
+
             $propertyClass = array(
                 'name' => $reflection->name,
                 'filename' => $reflection->getFileName(),
@@ -649,7 +643,7 @@ abstract class Tools
 
             $data['values'][$propertyName] = $attributesValues;
         }
-        
+
         return $data;
     }
 

@@ -58,6 +58,8 @@ module.exports =
         if isInFunction
             matches.push "$this"
 
+        matches = matches.filter (match, index) -> matches.indexOf(match) == index
+
         return matches
 
     ###*
@@ -334,6 +336,7 @@ module.exports =
             character = 0
             lineLength = line.length
             lastChain = null
+            inFunction = false
 
             # Scan the entire line, fetching the scope for each character position as one line can contain both a scope start
             # and end such as "} elseif (true) {". Here the scope descriptor will differ for different character positions on
@@ -346,20 +349,20 @@ module.exports =
                 # scanning line.length as sometimes line.length - 1 does not return a scope descriptor at all.
                 if not (character == line.length and chain == lastChain)
                     # }
-                    if chain.indexOf("scope.end") != -1
+                    if chain.indexOf("punctuation.definition.end.bracket.curly.php") != -1
                         closedBlocks++
                     # {
-                    else if chain.indexOf("scope.begin") != -1
+                    else if chain.indexOf("punctuation.definition.begin.bracket.curly.php") != -1
                         openedBlocks++
+
+                    if chain.indexOf(".entity.name.function.php") != -1
+                        inFunction = true
 
                 lastChain = chain
                 character++
 
-            # Get chain of all scopes
-            chain = editor.scopeDescriptorForBufferPosition([row, line.length]).getScopeChain()
-
             # function
-            if chain.indexOf("function") != -1
+            if inFunction
                 # If more openedblocks than closedblocks, we are in a function. Otherwise, could be a closure, continue looking.
                 if openedBlocks > closedBlocks
                     result = true
@@ -709,9 +712,11 @@ module.exports =
         # If there are multiple matches, just select the first method.
         if value instanceof Array
             for val in value
-                if val.isMethod
-                    value = val
+                if val.isMethod || val.isStatic
+                    return val
                     break
+            # return undefined if we didn't find a matching element
+            return
 
         return value
 
@@ -800,7 +805,7 @@ module.exports =
         foundEnd = false
         startBufferPosition = []
         endBufferPosition = []
-        forwardRegex = /-|(?:\()[\w\[\$\(\\]|\s|\)|;|'|,|"|\|/
+        forwardRegex = /-|(?:\()[\w\[\$\(\\]|\s|\)|;|'|,|"|:|\|/
         backwardRegex = /\(|\s|\)|;|'|,|"|\|/
         index = -1
         previousText = ''
