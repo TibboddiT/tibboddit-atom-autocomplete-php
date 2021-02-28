@@ -1,7 +1,9 @@
 <?php
 
 if (extension_loaded('xdebug')) {
-    xdebug_disable();
+    if (function_exists('xdebug_disable')) {
+        xdebug_disable();
+    }
 }
 
 /**
@@ -45,7 +47,8 @@ $commands = array(
 * Print an error
 * @param string $message
 */
-function show_error($message) {
+function show_error($message)
+{
     die(json_encode(array('error' => array('message' => $message))));
 }
 
