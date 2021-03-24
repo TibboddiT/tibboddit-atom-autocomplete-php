@@ -1,7 +1,7 @@
 {
   "name": "tibboddit-atom-autocomplete-php",
   "main": "./lib/peekmo-php-atom-autocomplete",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "description": "Atom autocompletion plugin for PHP language",
   "repository": {
     "type": "git",
