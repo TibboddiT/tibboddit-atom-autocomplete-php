@@ -122,12 +122,17 @@ class MemberProvider extends AbstractProvider
                     className   : if ele.args.deprecated then 'php-atom-autocomplete-strike' else ''
 
         suggestions = suggestions.sort (a, b) ->
-          if a.text.includes prefix
-            return -1
+            if (a.text.includes prefix and b.text.includes prefix) or ((not a.text.includes prefix) and (not b.text.includes prefix))
+                return a.text.length - b.text.length
 
-          if b.text.includes prefix
-            return 1
+            if a.text.includes prefix and (not b.text.includes prefix)
+                console.log(a.text + ' < ' + b.text)
+                return -1
 
-          return 0
+            if b.text.includes prefix and (not a.text.includes prefix)
+                console.log(a.text + ' > ' + b.text)
+                return 1
+
+            return 0
 
         return suggestions
