@@ -89,6 +89,7 @@ class ClassProvider extends AbstractProvider
                     className: if classInfo.class.deprecated then 'php-atom-autocomplete-strike' else ''
                     snippet: if insertParameterList then @getFunctionSnippet(word, args) else null
                     displayText: @getFunctionSignature(word, args)
+                    replacementPrefix: prefix
                     data:
                         kind: 'instantiation',
                         prefix: prefix,
@@ -98,11 +99,11 @@ class ClassProvider extends AbstractProvider
                 suggestions.push
                     text: word,
                     type: 'class',
-                    prefix: prefix,
                     className: if classInfo.class.deprecated then 'php-atom-autocomplete-strike' else ''
-                    replacementPrefix: prefix,
                     data:
                         kind: 'use'
+                        prefix: prefix,
+                        replacementPrefix: prefix
 
             # Not instantiation => not printing constructor params
             else
